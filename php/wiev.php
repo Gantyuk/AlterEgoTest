@@ -1,7 +1,8 @@
+<?php include("DB.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include("DB.php"); ?>
+
 <head>
     <meta charset="UTF-8">
     <title>servis_0</title>
@@ -25,12 +26,17 @@
     </style>
 </head>
 <body>
+<?php if (isset($_SESSION['loget_user'])): ?>
+    <p><?=$_SESSION['loget_user']['name']?></p>
+    <a href="/send">Надіслати</a>
+    <a href="/logout">Вийти</a>
+<?php else: ?>
 <a href="/login">Авторизація</a><br>
 <a href="/signup">Реєстрація</a>
-<?php /*foreach ($request as $item) {
+<?php endif;/*foreach ($request as $item) {
             echo $item;
             }
-*/?><!--
+*/ ?><!--
 
 </php>
 <div class="form">
