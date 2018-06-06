@@ -11,14 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
-        /* $data_send = [];
-         $data_send['log'] = $data['login_user_resiv'];
-         $data_send['mesage'] = $data['mesage'];
-         $data_send['token'] = $_SESSION['loget_user']['token'];
-         echo json_encode($data_send);*/
-
         $data_mesage = str_replace(" ", "~", $data['mesage']);
-        $url = "http://servis1/api/" . $data['login_user_resiv'] . "/" . $_SESSION['loget_user']['token'] . "/" . $data_mesage ;
+        $url = "http://servis1/api/" . $data['login_user_resiv'] . "/" . $_SESSION['loget_user']['token'] . "/" . $data_mesage . "/" . $_SESSION['loget_user']['log'];
         if ($curl = curl_init()) {
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
@@ -26,6 +20,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             curl_setopt($curl, CURLOPT_URL, $url);
             $response = curl_exec($curl);
             curl_close($curl);
+            $response_decod = json_decode($response);
+            foreach ($response_decod as $value => $item) {
+                $contact = $value;
+
+            }
+            if ($contact === "mesage") {
+                /*echo "SELECT count(`log_anozer_user`) FROM `contact`
+                                                 WHERE `id_user` =
+                                                  '" . $_SESSION['loget_user']['id_user'] . "' 
+                                                  AND `log_anozer_user`='" . $data['login_user_resiv'] . "'";*/
+                $count = $mysqli->query("SELECT count(`log_anozer_user`) AS coun FROM `contact` 
+                                                 WHERE `id_user` ='" . $_SESSION['loget_user']['id_user'] . "' 
+                                                  AND `log_anozer_user`='" . $data['login_user_resiv'] . "'")->fetch_assoc()['coun'];
+
+                if ($count == 0) {
+                    $mysqli->query("INSERT INTO `contact`(`id_user`, `log_anozer_user`)
+                                            VALUES ('" . $_SESSION['loget_user']['id_user'] . "','" . $data['login_user_resiv'] . "')");
+                   // echo "INSERT INTO `contact`(`id_user`, `log_anozer_user`) VALUES ('" . $_SESSION['loget_user']['id_user'] . "','" . $data['login_user_resiv'] . "')";
+                }
+            }
             echo $response;
         }
     } else {

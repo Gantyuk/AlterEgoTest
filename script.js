@@ -29,8 +29,13 @@ var sendRegister = function (e) {
                 $('#erorrs').html("<div  style=\"color: red\">" + mesage.errors + "</div>");
             } else if (mesage.mesage) {
                 $('#erorrs').html("<div  style=\"color: green\">" + mesage.mesage + "</div>");
+
                 window.setTimeout(function () {
+                    if(mesage.mesage == 'Вітаю ви успішно зареєструвались'){
                     window.location.replace("/login");
+                    }else {
+                        window.location.replace("/");
+                    }
                 }, 2000);
             }
         }
@@ -58,7 +63,7 @@ var loginfunc = function (e) {
         }
     });
 }
-var sendfunc=function (e) {
+var sendfunc = function (e) {
     e.preventDefault();
     var t = $(this);
     var data = t.serialize();
@@ -84,6 +89,14 @@ var sendfunc=function (e) {
 $(document).ready(function () {
     $('#apiform').bind('submit', sendForm);
     $('#signup').bind('submit', sendRegister);
-    $('#login').bind('submit',loginfunc);
-    $('#send').bind('submit',sendfunc);
+    $('#login').bind('submit', loginfunc);
+    $('#send').bind('submit', sendfunc);
+    $('#chech').change(function () {
+        if (this.checked == true) {
+            $('#pass').show();
+        } else {
+            $('#pass').removeAttr("style").hide();
+        }
+
+    });
 });

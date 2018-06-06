@@ -8,6 +8,12 @@ switch ($somevar[0]) {
     case 'api':
         include_once "php/api.php";
         break;
+    case 'contacts':
+        include_once "html/contacts.php";
+        break;
+    case 'contact':
+        include_once "html/contact.php";
+        break;
     case 'login':
         include_once "html/login.php";
         break;

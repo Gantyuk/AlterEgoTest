@@ -28,7 +28,9 @@
 <body>
 <?php if (isset($_SESSION['loget_user'])): ?>
     <p><?=$_SESSION['loget_user']['name']?></p>
-    <a href="/send">Надіслати</a>
+    <a href="/send">Надіслати</a><br>
+    <a href="/contacts">Контакти</a><br>
+    <a href="/signup">Редагувати профіль</a><br>
     <a href="/logout">Вийти</a>
 <?php else: ?>
 <a href="/login">Авторизація</a><br>
