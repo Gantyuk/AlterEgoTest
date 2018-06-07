@@ -7,11 +7,3 @@
 	$mysqli->query("SET NAMES 'utf8' COLLATE 'utf8_general_ci'");
 	$mysqli->query("SET CHARACTER SET 'utf8'");
 	session_start();
-
-
-
-
-
-	$request = $mysqli->query("SELECT mesage       
-                                        FROM mesages
-                                        WHERE token = 'token1'")->fetch_assoc();

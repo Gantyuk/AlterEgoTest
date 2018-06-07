@@ -1,5 +1,5 @@
-<?php
-include("php/DB.php");
+<?php include("nav_bar.php");
+
 $url = "http://servis1/api/contact/" . $somevar[1] . "/" . $_SESSION['loget_user']['token'];
 
 function array_sort($array, $on, $order = SORT_ASC)
@@ -61,17 +61,30 @@ if ($curl = curl_init()) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>servis_0</title>
-</head>
-<body>
-<?php foreach ($ansver as $mesag): ?>
-    <p><?= $mesag['log'] ?>:<?= $mesag['mesage'] . $mesag['Date_create'] ?></p>
-<?php endforeach;?>
-
+<div class="container">
+    <?php foreach ($ansver as $mesag): ?>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="alert alert-<?php if ($mesag['log'] == $_SESSION['loget_user']['log'])
+                    echo 'success';
+                else
+                    echo 'warning';
+                ?>" role="alert"><?= $mesag['log'] ?>:
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="alert alert-info" role="alert">
+                    <?= $mesag['mesage'] ?>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="alert alert-warning" role="alert">
+                    <?= $mesag['Date_create'] ?>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
 <script type='text/javascript' src='/jquery.js'></script>
 <script type='text/javascript' src='/script.js'></script>
 </body>

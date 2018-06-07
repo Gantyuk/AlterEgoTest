@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    if ($_POST['chech'] == "value1") {
+    if ($data['check'] == "value1") {
+
         if (!password_verify($data['password_chek'], $_SESSION['loget_user']['pass'])) {
             $errors[] = "Не правильний пароль!";
         }

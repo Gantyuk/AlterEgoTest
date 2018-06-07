@@ -26,10 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             }
             if ($contact === "mesage") {
-                /*echo "SELECT count(`log_anozer_user`) FROM `contact`
-                                                 WHERE `id_user` =
-                                                  '" . $_SESSION['loget_user']['id_user'] . "' 
-                                                  AND `log_anozer_user`='" . $data['login_user_resiv'] . "'";*/
                 $count = $mysqli->query("SELECT count(`log_anozer_user`) AS coun FROM `contact` 
                                                  WHERE `id_user` ='" . $_SESSION['loget_user']['id_user'] . "' 
                                                   AND `log_anozer_user`='" . $data['login_user_resiv'] . "'")->fetch_assoc()['coun'];
@@ -37,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($count == 0) {
                     $mysqli->query("INSERT INTO `contact`(`id_user`, `log_anozer_user`)
                                             VALUES ('" . $_SESSION['loget_user']['id_user'] . "','" . $data['login_user_resiv'] . "')");
-                   // echo "INSERT INTO `contact`(`id_user`, `log_anozer_user`) VALUES ('" . $_SESSION['loget_user']['id_user'] . "','" . $data['login_user_resiv'] . "')";
                 }
             }
             echo $response;

@@ -26,17 +26,14 @@ var sendRegister = function (e) {
         success: function (response) {
             var mesage = JSON.parse(response);
             if (mesage.errors) {
-                $('#erorrs').html("<div  style=\"color: red\">" + mesage.errors + "</div>");
+                up();
+                $('#erorrs').html("<div class=\"alert alert-warning\" role=\"alert\">" + mesage.errors + "</div>");
             } else if (mesage.mesage) {
-                $('#erorrs').html("<div  style=\"color: green\">" + mesage.mesage + "</div>");
-
+                $('#erorrs').html("<div class=\"alert alert-success\" role=\"alert\">" + mesage.mesage + "</div>");
+                up();
                 window.setTimeout(function () {
-                    if(mesage.mesage == 'Вітаю ви успішно зареєструвались'){
-                    window.location.replace("/login");
-                    }else {
-                        window.location.replace("/");
-                    }
-                }, 2000);
+                    window.location.replace("/");
+                }, 1500);
             }
         }
     });
@@ -53,16 +50,29 @@ var loginfunc = function (e) {
         success: function (response) {
             var mesage = JSON.parse(response);
             if (mesage.errors) {
-                $('#erorrs').html("<div  style=\"color: red\">" + mesage.errors + "</div>");
+                up();
+                $('#erorrs').html("<div class=\"alert alert-warning\" role=\"alert\">" + mesage.errors + "</div>");
             } else if (mesage.mesage) {
-                $('#erorrs').html("<div  style=\"color: green\">" + mesage.mesage + "</div>");
+                up();
+                $('#erorrs').html("<div class=\"alert alert-success\" role=\"alert\">" + mesage.mesage + "</div>");
                 window.setTimeout(function () {
                     window.location.replace("/");
-                }, 2000);
+                }, 1500);
             }
         }
     });
 }
+var t;
+
+function up() {
+    var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+    if (top > 0) {
+        window.scrollBy(0, -100);
+        t = setTimeout('up()', 50);
+    } else clearTimeout(t);
+    return false;
+}
+
 var sendfunc = function (e) {
     e.preventDefault();
     var t = $(this);
@@ -75,9 +85,11 @@ var sendfunc = function (e) {
         success: function (response) {
             var mesage = JSON.parse(response);
             if (mesage.errors) {
-                $('#erorrs').html("<div  style=\"color: red\">" + mesage.errors + "</div>");
+                up();
+                $('#erorrs').html("<div class=\"alert alert-warning\" role=\"alert\">" + mesage.errors + "</div>");
             } else if (mesage.mesage) {
-                $('#erorrs').html("<div  style=\"color: green\">" + mesage.mesage + "</div>");
+                up();
+                $('#erorrs').html("<div class=\"alert alert-success\" role=\"alert\">" + mesage.mesage + "</div>");
                 window.setTimeout(function () {
                     location.reload();
                 }, 2000);

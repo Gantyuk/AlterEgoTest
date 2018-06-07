@@ -14,11 +14,8 @@ switch ($somevar[0]) {
     case 'contact':
         include_once "html/contact.php";
         break;
-    case 'login':
-        include_once "html/login.php";
-        break;
-    case "signup":
-        include_once "html/signup.php";
+    case "edit":
+        include_once "html/edit.php";
         break;
     case "logout":
         include_once "php/logout.php";
